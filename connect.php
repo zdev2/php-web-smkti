@@ -1,13 +1,13 @@
 <?php
-$host = "db";
-$user = "user";
-$pass = "bintangsatu";
-$db   = "mydb";
+$host = 'db';
+$user = 'user';
+$pass = 'bintangsatu';
+$db = 'mydb';
 
 $conn = new mysqli($host, $user, $pass, $db);
 
 if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
+    die('Koneksi gagal: ' . $conn->connect_error);
 }
 
 $admin = "CREATE TABLE IF NOT EXISTS admin (
@@ -88,5 +88,4 @@ $conn->query($jurusan);
 $conn->query($mata_pelajaran);
 $conn->query($ekstrakulikuler);
 $conn->query($audit_log);
-
 ?>

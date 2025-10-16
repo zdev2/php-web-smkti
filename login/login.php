@@ -2,15 +2,17 @@
 session_start();
 include '../connect.php';
 
-$error = "";
+$error = '';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
 
     if ($username && $password) {
-        $stmt = $conn->prepare("SELECT id, password FROM users WHERE username=? AND deleted_at IS NULL");
-        $stmt->bind_param("s", $username);
+        $stmt = $conn->prepare(
+            'SELECT id, password FROM users WHERE username=? AND deleted_at IS NULL',
+        );
+        $stmt->bind_param('s', $username);
         $stmt->execute();
         $stmt->store_result();
 
@@ -21,17 +23,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (password_verify($password, $hashed_password)) {
                 $_SESSION['user_id'] = $user_id;
                 $_SESSION['username'] = $username;
-                header("Location: index.php");
-                exit;
+                header('Location: index.php');
+                exit();
             } else {
-                $error = "Password salah!";
+                $error = 'Password salah!';
             }
         } else {
-            $error = "Username tidak ditemukan!";
+            $error = 'Username tidak ditemukan!';
         }
         $stmt->close();
     } else {
-        $error = "Username dan password harus diisi!";
+        $error = 'Username dan password harus diisi!';
     }
 }
 ?>
