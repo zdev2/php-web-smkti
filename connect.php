@@ -12,6 +12,16 @@ if ($conn->connect_error) {
     die("Koneksi gagal: " . $conn->connect_error);
 }
 
+// Tabel Admin
+$admin = "CREATE TABLE admin (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(20),
+    password VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP DEFAULT NULL
+)";
+
 // Tabel Siswa
 $siswa = "CREATE TABLE siswa (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -81,8 +91,9 @@ $audit_log = "CREATE TABLE audit_log (
 )";
 
 // Buat table dengan struktur data di atas
-$conn->query($siswa);
+$conn->query($admin);
 $conn->query($guru);
+$conn->query($siswa);
 $conn->query($jurusan);
 $conn->query($mata_pelajaran);
 $conn->query($ekstrakulikuler);
