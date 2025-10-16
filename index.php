@@ -1,9 +1,4 @@
 <?php
-session_start();
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login/login.php");
-    exit;
-}
 include 'connect.php';
 ?>
 
@@ -16,6 +11,6 @@ include 'connect.php';
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <h1>Test</h1>
 </body>
 </html>

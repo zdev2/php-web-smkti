@@ -1,5 +1,4 @@
 <?php
-// KOneksi DB dan PHP
 $host = "db";
 $user = "user";
 $pass = "bintangsatu";
@@ -7,78 +6,70 @@ $db   = "mydb";
 
 $conn = new mysqli($host, $user, $pass, $db);
 
-// Cek Koneksi
 if ($conn->connect_error) {
     die("Koneksi gagal: " . $conn->connect_error);
 }
 
-// Tabel Admin
-$admin = "CREATE TABLE admin (
+$admin = "CREATE TABLE IF NOT EXISTS admin (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(20),
     password VARCHAR(100),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    deleted_at TIMESTAMP DEFAULT NULL
+    deleted_at TIMESTAMP NULL
 )";
 
-// Tabel Siswa
-$siswa = "CREATE TABLE siswa (
+$siswa = "CREATE TABLE IF NOT EXISTS siswa (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nis VARCHAR(20),
     nama VARCHAR(100),
     kelas VARCHAR(50),
-    jurusan VARCHAR(100)
-    created_at TIMESTAMP CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    jurusan VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     deleted_at TIMESTAMP NULL
 )";
 
-// Tabel Guru
-$guru = "CREATE TABLE guru (
+$guru = "CREATE TABLE IF NOT EXISTS guru (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nip VARCHAR(20),
     nama VARCHAR(100),
-    mapel VARCHAR(100)
+    mapel VARCHAR(100),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    deleted_at TIMESTAMP DEFAULT NULL
+    deleted_at TIMESTAMP NULL
 )";
 
-// Tabel Jurusan
-$jurusan = "CREATE TABLE jurusan (
+$jurusan = "CREATE TABLE IF NOT EXISTS jurusan (
     id INT AUTO_INCREMENT PRIMARY KEY,
     kode VARCHAR(10),
-    nama_jurusan VARCHAR(100)
+    nama_jurusan VARCHAR(100),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    deleted_at TIMESTAMP DEFAULT NULL
+    deleted_at TIMESTAMP NULL
 )";
 
-// Tabel Mata Pelajaran
-$mata_pelajaran = "CREATE TABLE mata_pelajaran (
+$mata_pelajaran = "CREATE TABLE IF NOT EXISTS mata_pelajaran (
     id INT AUTO_INCREMENT PRIMARY KEY,
-	nama_mapel VARCHAR (50),
-	kelas VARCHAR (10),
-	guru_pengajar VARCHAR (100) 
+    nama_mapel VARCHAR(50),
+    kelas VARCHAR(10),
+    guru_pengajar VARCHAR(100),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    deleted_at TIMESTAMP DEFAULT NULL
+    deleted_at TIMESTAMP NULL
 )";
 
-// Tabel Ekstrakurikuler
-$ekstrakulikuler = "CREATE TABLE ekstrakurikuler (
+$ekstrakulikuler = "CREATE TABLE IF NOT EXISTS ekstrakurikuler (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nama_ekstra VARCHAR(50),
     jadwal VARCHAR(20),
     guru_ekstra VARCHAR(100),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    deleted_at TIMESTAMP DEFAULT NULL
+    deleted_at TIMESTAMP NULL
 )";
 
-// Tabel Audit Log (untuk mengecek data yang dibuat atau diubah)
-$audit_log = "CREATE TABLE audit_log (
+$audit_log = "CREATE TABLE IF NOT EXISTS audit_log (
     id INT AUTO_INCREMENT PRIMARY KEY,
     action VARCHAR(10),
     table_name VARCHAR(50),
@@ -87,10 +78,9 @@ $audit_log = "CREATE TABLE audit_log (
     new_data JSON,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    deleted_at TIMESTAMP DEFAULT NULL
+    deleted_at TIMESTAMP NULL
 )";
 
-// Buat table dengan struktur data di atas
 $conn->query($admin);
 $conn->query($guru);
 $conn->query($siswa);
@@ -98,4 +88,5 @@ $conn->query($jurusan);
 $conn->query($mata_pelajaran);
 $conn->query($ekstrakulikuler);
 $conn->query($audit_log);
+
 ?>
