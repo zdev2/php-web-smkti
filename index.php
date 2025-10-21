@@ -27,6 +27,7 @@ session_start();
           <li><a href="login/" class="text-sky-100 hover:text-white font-semibold py-2 px-3 border-b-2 border-transparent hover:border-[#0b63d6]">Login</a></li>
         <?php else: ?>
           <li><a href="logout/" class="text-sky-100 hover:text-white font-semibold py-2 px-3 border-b-2 border-transparent hover:border-red-500">Logout</a></li>
+          <li><a href="/" class="text-sky-100 hover:text-white font-semibold py-2 px-3 border-b-2 border-transparent hover:border-red-500">Settings</a></li>
         <?php endif; ?>
       </ul>
     </div>
