@@ -52,6 +52,12 @@ session_start();
               <a href="jurusan/" class="bg-white shadow hover:shadow-lg rounded-xl p-6 border border-gray-200">
                 <h3 class="font-semibold text-lg text-[#0b2340]">Kelola Data Jurusan</h3>
               </a>
+              <a href="ekstrakurikuler/" class="bg-white shadow hover:shadow-lg rounded-xl p-6 border border-gray-200">
+                <h3 class="font-semibold text-lg text-[#0b2340]">Kelola Data Ekstrakurikuler</h3>
+              </a>
+              <a href="mata-pelajaran/" class="bg-white shadow hover:shadow-lg rounded-xl p-6 border border-gray-200">
+                <h3 class="font-semibold text-lg text-[#0b2340]">Kelola Data Mata Pelajaran</h3>
+              </a>
             </div>
           </div>
         <?php else: ?>

@@ -1,6 +1,11 @@
 <?php
 session_start();
+require_once __DIR__ . '/../connect.php';
+require_once __DIR__ . '/../components/table.php';
+require_once __DIR__ . '/../components/form.php';
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,28 +43,31 @@ session_start();
       <div class="min-h-[420px] bg-transparent">
         <?php if (isset($_SESSION['user_id'])): ?>
           <!-- Dashboard Section -->
-          <button data-target="insertMapelModal" class="openModal px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-        Tambah Mata Pelajaran
+          <button data-target="insertSiswaModal" class="openModal px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+        Tambah User
     </button>
     <?php
-        require_once '../connect.php';
-        require_once '../components/table.php';
-        require_once '../components/form.php';
-        if (function_exists('renderModal')) {
+          // render add modal (uses components/form.php -> renderModal)
+          if (function_exists('renderModal')) {
               renderModal(
-                  id: 'insertMapelModal',
-                  table: 'mata_pelajaran',
-                  title: 'Tambah Mata Pelajaran',
+                  id: 'insertSiswaModal',
+                  table: 'siswa',
+                  title: 'Tambah Siswa',
                   action: '../components/insert.php',
                   fields: [
-                      ['name' => 'nama_mapel', 'type' => 'text', 'label' => 'Nama Mata Pelajaran'],
+                      ['name' => 'nis', 'type' => 'text', 'label' => 'NIS'],
+                      ['name' => 'nama', 'type' => 'text', 'label' => 'Nama'],
                       ['name' => 'kelas', 'type' => 'text', 'label' => 'Kelas'],
-                      ['name' => 'guru_pengajar', 'type' => 'text', 'label' => 'Guru Pengajar'],
+                      ['name' => 'jurusan', 'type' => 'text', 'label' => 'Jurusan']
                   ]
               );
+          } else {
+              echo '<div class="text-red-600">Component renderModal() tidak ditemukan.</div>';
           }
-        renderTable('mata_pelajaran', ['id','nama_mapel','kelas','guru_pengajar'], 'Daftar Mata Pelajaran');
-    ?>
+
+          // render table (components/table.php)
+          renderTable('siswa', ['id','nis','nama','kelas','jurusan'], 'Daftar Siswa');
+        ?>
     <script src="../public/modal.js"></script>
         <?php else: ?>
           <!-- Public Message -->

@@ -71,14 +71,14 @@ $ekstrakulikuler = "CREATE TABLE IF NOT EXISTS ekstrakurikuler (
 
 $audit_log = "CREATE TABLE IF NOT EXISTS audit_log (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    action VARCHAR(10),
-    table_name VARCHAR(50),
-    record_id INT,
-    old_data JSON,
-    new_data JSON,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    deleted_at TIMESTAMP NULL
+    user_id INT NULL,
+    action VARCHAR(20) NOT NULL, -- insert / update / delete
+    table_name VARCHAR(100) NOT NULL,
+    record_id INT NULL,
+    data LONGTEXT NULL, -- json payload
+    ip_address VARCHAR(45) NULL,
+    user_agent TEXT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )";
 
 $conn->query($admin);
