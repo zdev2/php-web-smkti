@@ -1,5 +1,7 @@
 <?php
-function renderModal($id, $title, $action, $fields = []) {
+require_once '../connect.php';
+
+function renderModal($id, $table, $title, $action, $fields = []) {
   ?>
   <div id="<?= htmlspecialchars($id) ?>" class="fixed inset-0 hidden z-50 bg-black bg-opacity-50 flex items-center justify-center" role="dialog" aria-modal="true" aria-labelledby="<?= htmlspecialchars($id) ?>-title" tabindex="-1">
     <div class="relative bg-white rounded-2xl shadow-lg w-full max-w-lg mx-4 border border-gray-200">
@@ -9,6 +11,7 @@ function renderModal($id, $title, $action, $fields = []) {
         </div>
 
         <form id="<?= htmlspecialchars($id) ?>-form" method="POST" action="<?= htmlspecialchars($action) ?>" class="space-y-4">
+          
           <?php foreach ($fields as $field): 
             $name  = htmlspecialchars($field['name'] ?? '');
             $type  = $field['type'] ?? 'text';
@@ -16,6 +19,7 @@ function renderModal($id, $title, $action, $fields = []) {
             $opts  = $field['options'] ?? null;
           ?>
             <div>
+              <input type="hidden" name="table" value="<?= htmlspecialchars($table) ?>">
               <label for="<?= $name ?>" class="block text-sm font-medium text-gray-700 mb-1"><?= $label ?></label>
 
               <?php if ($opts && is_array($opts)): ?>

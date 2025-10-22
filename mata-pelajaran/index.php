@@ -16,6 +16,7 @@ if (file_exists($comp)) {
   <meta charset="UTF-8">
   <title>Reusable Modal Tailwind + PHP</title>
   <script src="https://cdn.tailwindcss.com"></script>
+   <!-- <link rel="stylesheet" href="../public/output.css"> -->
 </head>
 <body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen">
 
